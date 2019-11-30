@@ -8,12 +8,10 @@ def make_apple(screen, x, y, image):
         # pygame.draw.circle(screen, c, (x,y), 10)
         screen.blit(image, (x-10,y-10)) 
 
-
 def Get_cord():
         x = (random.randrange(10, 630)) 
         y = (random.randrange(10, 470))
         return (x,y)
-
 
 def checker_circle(points, position, counter, chord):
     points = points + [position]
@@ -26,12 +24,7 @@ def checker_circle(points, position, counter, chord):
         is_dot_reached = True
         chord = Get_cord()
         counter += 1
-
-
-
     return (points, counter, chord)
-
-
 
 def main():
     pygame.init()
@@ -40,7 +33,6 @@ def main():
     c = (155, 50, 75)
     is_dot_reached = False
 
-     
     radius = 8
     x = 0
     y = 0
@@ -56,18 +48,14 @@ def main():
     image1 = pygame.image.load("apple.png") 
     image = pygame.transform.scale(image1, (20,20))
     direction = (3,0)
-
     while True:
-        
-
         pressed = pygame.key.get_pressed()
         print("running", points)
          
         alt_held = pressed[pygame.K_LALT] or pressed[pygame.K_RALT]
         ctrl_held = pressed[pygame.K_LCTRL] or pressed[pygame.K_RCTRL]
          
-        for event in pygame.event.get():
-             
+        for event in pygame.event.get(): 
             # determin if X was clicked, or Ctrl+W or Alt+F4 was used
             if event.type == pygame.QUIT:
                 return
@@ -85,50 +73,23 @@ def main():
                     mode = 'green'
                 elif event.key == pygame.K_b:
                     mode = 'blue'
-             
+
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if event.button == 1: # left click grows radius 
                     radius = min(200, radius + 1)
                 elif event.button == 3: # right click shrinks radius
                     radius = max(1, radius - 1)
-                
-             
-            # if event.type == pygame.MOUSEMOTION:
-            #     # if mouse moved, add point to list 
-            #     position = event.pos
-            #     points = points + [position]
-            #     points = points[-100:]
 
-                
-
-
-            #     if position[0] >= circleX-10 and position[0] <= circleX+10 and position[1] >= circleY-10 and position[1] <= circleY+10:
-            #             is_dot_reached = True
-            #             print("dot reached")
-            #             chord = Get_cord()
-            #             circleX = chord[0]
-            #             circleY = chord[1]
-            #             counter += 1
-                        
-            #     else:
-            #             print(position)
-        
         screen.fill((255, 255, 0))
 
         if pressed[pygame.K_UP]: 
             direction = (0,-1)
-            
-
         if pressed[pygame.K_DOWN]: 
             direction = (0,1)
-            
- 
         if pressed[pygame.K_LEFT]: 
             direction = (-1, 0)
-            
         if pressed[pygame.K_RIGHT]: 
             direction = (1, 0)
-
 
         pos = points[-1]
         posx = pos[0]
@@ -160,10 +121,7 @@ def main():
 
         font = pygame.font.SysFont("comicsansms", 20)
         text = font.render(("score " + str(counter)), True, (250, 128, 255))
-
         screen.blit(text,(630 - text.get_width(), 15))
- 
-
         pygame.display.flip()     
         clock.tick(100)
  
@@ -179,7 +137,6 @@ def drawLineBetween(screen, index, start, end, width, color_mode):
     elif color_mode == 'green':
         color = (c1, c2, c1)
 
-     
     dx = start[0] - end[0]
     dy = start[1] - end[1]
     iterations = max(abs(dx), abs(dy))
@@ -191,6 +148,4 @@ def drawLineBetween(screen, index, start, end, width, color_mode):
         cc = int(aprogress * start[1] + progress * end[1])
         pygame.draw.circle(screen, color, (dd, cc), width)
 
-
- 
 main()
