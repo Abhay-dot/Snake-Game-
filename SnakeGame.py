@@ -2,7 +2,7 @@ import pygame
 import random 
 import time 
 
-# bvhghghjbu
+# learn_branch pull request concept 
 
 def make_apple(screen, x, y, image):
         # c = (155, 50, 75)
