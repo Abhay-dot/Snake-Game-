@@ -15,7 +15,7 @@ def Get_cord():
 
 def checker_circle(points, position, counter, chord):
     points = points + [position]
-    points = points[-5-(counter*5):]
+    points = points[-100-(counter*10):]
     circleX = chord[0]
     circleY = chord[1]
     cordinatex = points[-1][0]
@@ -95,6 +95,8 @@ def main():
         posx = pos[0]
         posy = pos[1]
         point2 = points
+        color = (255,255,255)
+        
         if posx >= 0 and posx <= 640 and posy >= 0 and posy <= 480:
             position = (direction[0]+posx, direction[1]+posy)
             (points, counter, chord) = checker_circle(points, position, counter, chord)
@@ -118,6 +120,11 @@ def main():
         while i < len(points) - 1:
             drawLineBetween(screen, i, points[i], points[i + 1], radius, mode)
             i += 1
+            pygame.draw.circle(screen, color, (posx-4,posy-4), 8)
+            pygame.draw.circle(screen, color, (posx+4,posy+4), 8)            
+            pygame.draw.circle(screen, color, (posx-4,posy+4), 8)
+            pygame.draw.circle(screen, color, (posx+4,posy-4), 8)
+            pygame.draw.circle(screen, (20,10,20), (posx,posy), 5)
 
         font = pygame.font.SysFont("comicsansms", 20)
         text = font.render(("score " + str(counter)), True, (250, 128, 255))
